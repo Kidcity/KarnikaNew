@@ -103,12 +103,12 @@ class EditProfileScreen extends Component {
         })
         EditProfileService._getProfileInfoService(param).then(response => {
             const data = response?.data?.data?.data
-            console.log(data);
-            if (!response?.data?.data?.data) {
+            if (!data) {
                 errorAlert("Message", "API error: Proper data is missing")
                 return
             }
-
+            
+            console.log(data);
             this.setState({
                 mobile: data?.retailer_info[0]?.mobile_no,
                 email: data?.retailer_info[0]?.email,
@@ -255,6 +255,7 @@ class EditProfileScreen extends Component {
                         container={{
                             marginTop: 0
                         }}
+                        placeholder="Enter Email"
                         onChangeText={(e) => this.setState({ email: e })}
                     />
 
@@ -273,10 +274,10 @@ class EditProfileScreen extends Component {
                     />
 
                     {
-                        this.state.gst_pan !== "" &&
+                        // this.state.gst_pan !== "" &&
                         <Text style={[styles.label, commonStyle.gapTop10]}>
                             {
-                                this.state.gst_or_pan === "PAN" ? "PAN" : "GST"
+                                this.state.gst_or_pan
                             }
                         </Text>
                     }
@@ -287,10 +288,11 @@ class EditProfileScreen extends Component {
                             marginTop: 0
                         }}
                       editable={false}
+                      placeholder="********"
                     />
 
                     {
-                        this.state.company_name !== "" &&
+                        // this.state.company_name !== "" &&
                         <Text style={[styles.label, commonStyle.gapTop10]}>Company Name</Text>
                     }
                     <CustomTextInput
@@ -319,7 +321,7 @@ class EditProfileScreen extends Component {
 
 
                     {
-                        this.state.address !== "" &&
+                        // this.state.address !== "" &&
                         <Text style={[styles.label, commonStyle.gapTop10]}>Address</Text>
                     }
                     <CustomTextInput
@@ -333,7 +335,7 @@ class EditProfileScreen extends Component {
                     />
 
                     {
-                        this.state.state !== "" &&
+                        // this.state.state !== "" &&
                         <Text style={[styles.label, commonStyle.gapTop10]}>State</Text>
                     }
                     <CustomTextInput
@@ -347,7 +349,7 @@ class EditProfileScreen extends Component {
                     />
 
                     {
-                        this.state.dist !== "" &&
+                        // this.state.dist !== "" &&
                         <Text style={[styles.label, commonStyle.gapTop10]}>City</Text>
                     }
                     <CustomTextInput
@@ -361,7 +363,7 @@ class EditProfileScreen extends Component {
                     />
 
                     {
-                        this.state.pin !== "" &&
+                        // this.state.pin !== "" &&
                         <Text style={[styles.label, commonStyle.gapTop10]}>Pin</Text>
                     }
                     <CustomTextInput

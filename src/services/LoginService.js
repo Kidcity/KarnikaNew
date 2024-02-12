@@ -13,7 +13,7 @@ class LoginService extends Base {
         //console.log(param);
         return new Promise((resolve, reject) => {
             this.post(LOGIN_SLUG, param).then(async response => {
-                // console.log(JSON.stringify(response.data.data));
+                console.log(JSON.stringify(response.data.data));
                
                 if (response?.data?.data?.success == "0") {
 
@@ -29,39 +29,40 @@ class LoginService extends Base {
                         const resp_data = response?.data?.data?.data
 
                         const data = {
-                            android_version: response.data.data.data.android_version,
-                            ios_version: response.data.data.data.ios_version,
-                            cust_manu_id: response.data.data.data.cust_manu_id,
-                            default_address: response.data.data.data.default_address,
-                            email: response.data.data.data.email,
-                            first_name: response.data.data.data.first_name,
-                            last_name: response.data.data.data.last_name,
-                            image: response.data.data.data.image,
-                            phone: response.data.data.data.phone,
-                            shop_name: response.data.data.data.shop_name,
-                            user_name: response.data.data.data.user_name,
-                            user_type_id: response.data.data.data.user_type_id,
+                            android_version: resp_data?.android_version,
+                            ios_version: resp_data?.ios_version,
+                            cust_manu_id: resp_data?.cust_manu_id,
+                            default_address: resp_data?.default_address,
+                            email: resp_data?.email,
+                            first_name: resp_data?.first_name,
+                            last_name: resp_data?.last_name,
+                            image: resp_data?.image,
+                            phone: resp_data?.phone,
+                            shop_name: resp_data?.shop_name,
+                            user_name: resp_data?.user_name,
+                            user_type_id: resp_data?.user_type_id,
                             is_applied_for_credit: 0,
                             is_ws_not: +resp_data?.is_ws_not
                         }
 
-                        if (!response.data.data.data.default_address) {
-                            reject({ message: "API error: Proper data is not coming" })
-                            return
-                        }
+                        // if (!resp_data?.default_address) {
+                        //     reject({ message: "API error: Proper data is not coming" })
+                        //     return
+                        // }
 
-                        const add = response.data.data.data.default_address
-                        const address = {
-                            address_book_id: add.address_book_id,
-                            name: response.data.data.data.shop_name,
-                            address: add.entry_address1,
-                            state: add.zone_name,
-                            pin: add.entry_postcode,
-                            country: add.countries_name,
-                            mobile: response.data.data.data.phone,
-                            email: response.data.data.data.email,
-                            isChecked: true
-                        }
+                        // const add = resp_data.default_address
+                        const address = null
+                        // const address = {
+                        //     address_book_id: add.address_book_id,
+                        //     name: resp_data.shop_name,
+                        //     address: add.entry_address1,
+                        //     state: add.zone_name,
+                        //     pin: add.entry_postcode,
+                        //     country: add.countries_name,
+                        //     mobile: resp_data.phone,
+                        //     email: resp_data.email,
+                        //     isChecked: true
+                        // }
 
                         // console.log(data);
                        

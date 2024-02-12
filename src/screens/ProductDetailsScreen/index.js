@@ -308,6 +308,11 @@ class ProductDetailsScreen extends Component {
         // return
 
         const sizelist = this.state.productSizeList
+        const default_address = this.props.addressReducer.default_address
+        if(!default_address){
+            errorAlert("Error", "Please add your shipping address.")
+            return
+        }
 
         const size_group_ids = sizelist.filter(function (item) {
             return (item.total_selected != 0)
@@ -855,6 +860,7 @@ class ProductDetailsScreen extends Component {
 const mapStateToProps = state => {
     return {
         loginReducer: state.loginReducer,
+        addressReducer: state.addressReducer,
         filter: state.commonReducer.filter,
         total_wishlist_count: state.wishListReducer.total_wishlist_count,
         cart_items: state.cartReducer.cart_items,

@@ -44,7 +44,7 @@ class CartScreen extends Component {
             amount_to_pay_city_wallet: 0,
 
             showLoader: false,
-            noCartData: false,
+            noCartData: true,
             notDeliverable: false,
             showEmptyCartModal: false,
             openWebViewModal: false,
@@ -840,10 +840,17 @@ class CartScreen extends Component {
         const param = {
             retailer_id: this.props.loginReducer.data.cust_manu_id
         }
+        const default_address = this.props.addressReducer.default_address
+        if(!default_address){
+            console.log(this.state.noCartData, this.state.total_cart_items);
+            errorAlert("Error", "Please add your shipping address.")
+        }
+        return
+
 
         this.setState({ showLoader: true })
         CartServices._getCartProductService(param).then(response => {
-
+            
             this.setState({
                 showLoader: false,
                 total_cart_items: response?.total_cart_items,
@@ -987,7 +994,7 @@ class CartScreen extends Component {
 
 
                 {
-                    this.state.total_cart_items != 0 &&
+                    !this.state.noCartData &&
                     <View style={styles.footer}>
                         <TouchableOpacity style={styles.footerBtn} onPress={() => this.onpressFooterButton()}>
                             <Text style={styles.footerBtnText}>
@@ -1077,6 +1084,7 @@ class CartScreen extends Component {
 const mapStateToProps = state => {
     return {
         loginReducer: state.loginReducer,
+        addressReducer: state.addressReducer,
         cartReducer: state.cartReducer,
         total_cart_items: state.cartReducer.total_cart_items,
         cart_items: state.cartReducer.cart_items,

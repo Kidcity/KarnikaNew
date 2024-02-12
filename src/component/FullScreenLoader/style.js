@@ -14,9 +14,10 @@ export const styles = StyleSheet.create({
         // justifyContent:'center',
     },  
     lottiView: {
-        position: 'relative',
+        // position: 'relative',
         height: setHeight(100),
-        // width: setWidth(50),
+        width: setWidth(50),
         alignSelf: 'center',
+        // backgroundColor: 'red',
     },
 })

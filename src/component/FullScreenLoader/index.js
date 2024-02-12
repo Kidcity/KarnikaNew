@@ -1,4 +1,4 @@
-import Lottie from 'lottie-react-native';
+import LottieView from 'lottie-react-native';
 import React, { Component } from 'react';
 import { View, Text, Image } from 'react-native';
 import { gif } from '../../utils/variable';
@@ -14,7 +14,7 @@ export default class FullScreenLoader extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Lottie
+        <LottieView 
           autoPlay
           loop
           style={styles.lottiView}

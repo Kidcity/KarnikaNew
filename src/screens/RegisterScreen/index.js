@@ -56,7 +56,7 @@ export default class RegisterScreen extends Component {
   }
 
   static getDerivedStateFromProps(props, state) {
-    
+
     return {
       is_ws_not: props.route.params?.reg_type ?? 0
     }
@@ -111,7 +111,7 @@ export default class RegisterScreen extends Component {
 
       if (response.data.data.result) {
         const data = response?.data?.data?.result
-        
+
         this.setState({
           companyname: data?.legal_name,
           city: data?.primary_business_address?.location,
@@ -141,7 +141,7 @@ export default class RegisterScreen extends Component {
       } else {
         this.setState({
           errMessage: error.message,
-           showErrorModal: true
+          showErrorModal: true
         })
         // errorAlert("Error", error.message)
       }
@@ -153,10 +153,10 @@ export default class RegisterScreen extends Component {
     const param = {
       pan_no: this.state.pangstno
     }
-  
+
     this.setState({ showLoader: true })
     await RegisterService._checkValidPANService(param).then(response => {
-      
+
       if (response.data.data.data) {
         const data = response.data.data.data
         this.setState({
@@ -167,7 +167,7 @@ export default class RegisterScreen extends Component {
         this.setState({ showLoader: false })
       }
     }, error => {
-     
+
       this.setState({ showLoader: false })
       if (error.message == "server_error") {
         this.setState({
@@ -185,7 +185,7 @@ export default class RegisterScreen extends Component {
       } else {
         this.setState({
           errMessage: error.message,
-           showErrorModal: true
+          showErrorModal: true
         })
         // errorAlert("Error", error.message)
       }
@@ -225,7 +225,7 @@ export default class RegisterScreen extends Component {
       } else {
         this.setState({
           errMessage: error.message,
-           showErrorModal: true
+          showErrorModal: true
         })
         // errorAlert("Error", error.message)
       }
@@ -259,7 +259,7 @@ export default class RegisterScreen extends Component {
       } else {
         this.setState({
           errMessage: error.message,
-           showErrorModal: true
+          showErrorModal: true
         })
         // errorAlert("Error", error.message)
       }
@@ -270,31 +270,15 @@ export default class RegisterScreen extends Component {
 
     const imageObj = this.state.imageObj
     const device_token = await AsyncStorage.getItem('@device_token_KARNIKA')
-
+    
     const param = {
-      // fcm_token: device_token,
-      bill_address: this.state.address,
-      channel_partner_id: this.state.cppartnercode,
-      city_id: this.state.selectedDistrict,
-      city_name: this.state.city,
-      company_name: this.state.companyname,
-      company_type: this.state.selectedCompanyType,
-      email_id: this.state.email,
-      gst_no: this.state.pangstno,
-      is_pan_or_gst: (this.state.isgst) ? 1 : 0,
+      fcm_token: device_token,
       is_accept_tnc: true,
       mobile_no: this.state.mobile,
-
       owner_name: this.state.ownername,
-      password: this.state.password,
-      confirm_password: this.state.confpassword,
-      pin: this.state.pin,
-      shop_name: (this.state.is_ws_not === 1)? this.state.companyname : this.state.shopname,
+      shop_name: this.state.shopname,
       store_photo: (Object.keys(imageObj).length > 0) ? 'data:image/jpg;base64,' + imageObj.assets[0].base64 : '',
-
       is_ws_not: this.state.is_ws_not + "",
-
-      zone: this.state.selectedState,
 
       android_version: (Platform.OS === 'android') ? VersionInfo.appVersion.toString() : '',
       ios_version: (Platform.OS === 'ios') ? VersionInfo.appVersion.toString() : '',
@@ -316,7 +300,7 @@ export default class RegisterScreen extends Component {
         console.log(error);
         this.setState({
           errMessage: error.message,
-           showErrorModal: true
+          showErrorModal: true
         })
         // errorAlert("Error", error.message)
       }
@@ -353,7 +337,7 @@ export default class RegisterScreen extends Component {
           // showSearch
           // showWishList
           showLabel
-          label={"Sign Up As "+this.props.route.params?.reg_label  }
+          label={"Sign Up As " + this.props.route.params?.reg_label}
           navigation={this.props.navigation}
         />
         <KeyboardAwareScrollView contentContainerStyle={styles.content}>
@@ -376,24 +360,24 @@ export default class RegisterScreen extends Component {
             value={this.state.mobile}
             onChangeText={(e) => this.setState({ mobile: e })}
           />
+          {/*           
           <CustomTextInput
             placeholder={Strings.signupScreenStrings.emailText}
             inputStyle={styles.inputStyle}
             keyboardType="email-address"
             value={this.state.email}
             onChangeText={(e) => this.setState({ email: e })}
+          /> */}
+
+
+          <CustomTextInput
+            placeholder={Strings.signupScreenStrings.shopnameText}
+            inputStyle={styles.inputStyle}
+            value={this.state.shopname}
+            onChangeText={(e) => this.setState({ shopname: e })}
           />
 
-          {
-            (this.state.is_ws_not === 0) &&
-            <CustomTextInput
-              placeholder={Strings.signupScreenStrings.shopnameText}
-              inputStyle={styles.inputStyle}
-              value={this.state.shopname}
-              onChangeText={(e) => this.setState({ shopname: e })}
-            />
-          }
-
+{/* 
           <View style={[styles.row]}>
             <CustomTextInput
               container={{ flex: 1 }}
@@ -413,12 +397,14 @@ export default class RegisterScreen extends Component {
               </TouchableOpacity>
             </View>
           </View>
+           
           <CustomTextInput
             placeholder={Strings.signupScreenStrings.companynameText}
             inputStyle={styles.inputStyle}
             value={this.state.companyname}
             onChangeText={(e) => this.setState({ companyname: e })}
           />
+          */}
           {/* <Dropdown
             container={styles.dropdownContainer}
             placeholderStyle={styles.dropdownPlacholderStyle}
@@ -439,6 +425,7 @@ export default class RegisterScreen extends Component {
             value={this.state.ownername}
             onChangeText={(e) => this.setState({ ownername: e })}
           />
+{/*           
           <CustomTextInput
             placeholder={Strings.signupScreenStrings.billingaddressText}
             inputStyle={styles.inputStyle}
@@ -497,6 +484,7 @@ export default class RegisterScreen extends Component {
             value={this.state.pin}
             onChangeText={(e) => this.setState({ pin: e })}
           />
+           */}
           {/* <CustomTextInput
             placeholder={Strings.signupScreenStrings.passwordText}
             inputStyle={styles.inputStyle}
@@ -593,7 +581,7 @@ export default class RegisterScreen extends Component {
             isOpen={this.state.showLoader}
           />
         }
-         {
+        {
           this.state.showErrorModal &&
           <EmptyCartModal
             title={this.state.errMessage}

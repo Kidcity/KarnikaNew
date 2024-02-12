@@ -4,7 +4,7 @@ import Feather from 'react-native-vector-icons/Feather'
 import colors from '../../utils/colors';
 import { icons, setWidth } from '../../utils/variable';
 import { styles } from './style';
-import Ionicons from 'react-native-vector-icons/Ionicons'
+import FontAwesome from 'react-native-vector-icons/FontAwesome'
 
 
 export default class FloatingMenuIcon extends Component {
@@ -14,7 +14,7 @@ export default class FloatingMenuIcon extends Component {
             items: [
                 {
                     title: 'Whatsapp',
-                    icon: <Ionicons name='md-chatbubble-outline' size={setWidth(5)} color={colors.white} />,
+                    icon: <FontAwesome name='whatsapp' size={setWidth(6)} color={colors.white} />,
                     bgcolor: colors.green1,
                     onPress: () => this.linkToWhatsapp()
                 },

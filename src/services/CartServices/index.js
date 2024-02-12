@@ -29,6 +29,7 @@ class CartServices extends Base {
         const default_address = store.getState().addressReducer.default_address
 
         return new Promise((resolve, reject) => {
+
             this.post(CART_DETAILS_SLUG, param).then(async response => {
 
                 let total_cart_items = 0

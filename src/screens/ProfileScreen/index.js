@@ -118,7 +118,7 @@ class ProfileScreen extends Component {
     }
 
     render() {
-        console.log("this.state.userdata.image ------- ",this.state.userdata.image);
+        console.log("this.state.userdata.image ------- ", this.state.userdata.image);
         return (
             <View style={styles.contianer}>
                 {/* <CustomHeader
@@ -198,22 +198,24 @@ class ProfileScreen extends Component {
                                                 <Text style={[{ fontFamily: fonts.fontRegular, color: colors.white }, commonStyle.text11]}>Edit Profile</Text>
                                             </TouchableOpacity>
                                         </View>
-                                        <View style={[styles.row, { alignItems: 'center', justifyContent: 'center', marginTop: setWidth(3) }]}>
-                                            <SimpleLineIcons name='location-pin' size={setWidth(6)} color={colors.white} />
-                                            <Text style={styles.location}>
-
-                                                {this.state.userdata?.default_address?.entry_address1} , {this.state.userdata?.default_address?.entry_city} {this.state.userdata?.default_address?.entry_postcode} {this.state.userdata?.default_address?.zone_name}
-                                            </Text>
-                                        </View>
+                                        {
+                                            this.state.userdata?.default_address &&
+                                            <View style={[styles.row, { alignItems: 'center', justifyContent: 'center', marginTop: setWidth(3) }]}>
+                                                <SimpleLineIcons name='location-pin' size={setWidth(6)} color={colors.white} />
+                                                <Text style={styles.location}>
+                                                    {this.state.userdata?.default_address?.entry_address1} , {this.state.userdata?.default_address?.entry_city} {this.state.userdata?.default_address?.entry_postcode} {this.state.userdata?.default_address?.zone_name}
+                                                </Text>
+                                            </View>
+                                        }
                                     </>
                             }
                         </LinearGradient>
                     </Animated.View>
 
-                    {                        
+                    {
                         <TextCard
                             image={icons.shopping_bag}
-                            leftText={  this.state.is_ws_not == 1 ? "My Orders" : "My Request"}
+                            leftText={this.state.is_ws_not == 1 ? "My Orders" : "My Request"}
                             onPress={() => { this.props.navigation.navigate("MyOrders") }}
                             rightIcon={<Feather name='arrow-right' size={setWidth(5)} color={colors.dark_charcoal} />}
                             containerStyle={{
