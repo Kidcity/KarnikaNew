@@ -1,1 +1,1 @@
-module.exports.production = true;
+module.exports.production = false;
