@@ -18,6 +18,7 @@ module.exports = {
     REGISTER_FORM_BASIC_DATA_SLUG: "retailerRegistrationForm",
     GET_CITY_NAME_SLUG: "get_city_name",
     REGISTER_SLUG: "retailerRegistration",
+    UPDATE_PROFILE_SLUG: "updateRetailerData",
 
     ICONIC_BRAND_SLUG: "getIconicBrands",
     SHOP_IN_SHOP_SLUG: "getShopInShopBrands",

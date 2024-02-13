@@ -12,12 +12,12 @@ export default class Dropdown extends Component {
         };
     }
 
-    static getDerivedStateFromProps(props, state) {
-        // console.log(props);
-        return{
+    // static getDerivedStateFromProps(props, state) {
+    //     // console.log(props);
+    //     return{
 
-        }
-    }
+    //     }
+    // }
 
     renderItem = (item: any) => {
         return (

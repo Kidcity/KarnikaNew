@@ -13,7 +13,7 @@ export const Strings = {
         heading: "SIGN UP AS RETAILER",
         uploadphotoText: "Upload Store Photo",
         mobilenumberText: "Mobile Number*",
-        emailText: "Email Id*",
+        emailText: "Email Id",
         shopnameText:"Shop Name*",
         panfieldText: "No. Here*",
         gstText: "GST",

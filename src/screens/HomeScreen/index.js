@@ -29,6 +29,8 @@ import FloatingMenuIcon from '../../component/FloatingMenuIcon'
 import { successToast } from '../../helper/ToastHelper'
 import CommonService from '../../services/CommonService'
 import Share from 'react-native-share';
+import RegisterFormModal from '../../component/RegisterFormModal'
+import { getStore, setToStore } from '../../helper/AsyncStorageHelper'
 
 class Home extends Component {
 
@@ -55,9 +57,11 @@ class Home extends Component {
       all_filter_cleared: 0,
       isSetFeed: false,
       is_ws_not: 0,
-      user_id: ""
+      user_id: "",
+      showRegisterModal: false
     }
     this.scrollRef = React.createRef()
+    this.timer = React.createRef().current
   }
 
   static getDerivedStateFromProps(props, state) {
@@ -74,6 +78,14 @@ class Home extends Component {
   }
 
   async componentDidMount() {
+    const profileUpdated = await getStore("profileUpdated")
+    if(+profileUpdated !== 1){
+      this.timer = setTimeout(() => {
+        this.setState({
+          showRegisterModal: true
+        })
+      }, 1000);
+    }
     this.willFocusSubscription = this.props.navigation.addListener(
       'focus',
       async () => {
@@ -86,10 +98,13 @@ class Home extends Component {
     await this.props.clearProductListData()
 
     this._singleTymCallingApis()
+
+
   }
 
   componentWillUnmount() {
     this.willFocusSubscription()
+    clearTimeout(this.timer)
   }
 
   _singleTymCallingApis = async () => {
@@ -433,7 +448,7 @@ class Home extends Component {
     }
 
     const filter = this.state.filter
-    console.log(filter);
+ 
     await this.props.clearProductListData()
     await this.props.clearProductFilterAction()
     await this.props.setProductFilterAction(filter)
@@ -678,6 +693,16 @@ class Home extends Component {
           this.state.showLoader &&
           <FullScreenLoader
             isOpen={this.state.showLoader}
+          />
+        }
+        {
+          this.state.showRegisterModal &&
+          <RegisterFormModal 
+            onClose={()=> {
+              setToStore("profileUpdated", '1')
+              clearTimeout(this.timer)
+              this.setState({showRegisterModal: false})
+            }}
           />
         }
       </View>

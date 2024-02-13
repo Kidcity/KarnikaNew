@@ -845,9 +845,7 @@ class CartScreen extends Component {
             console.log(this.state.noCartData, this.state.total_cart_items);
             errorAlert("Error", "Please add your shipping address.")
         }
-        return
-
-
+        
         this.setState({ showLoader: true })
         CartServices._getCartProductService(param).then(response => {
             
